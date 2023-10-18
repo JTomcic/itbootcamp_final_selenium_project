@@ -34,4 +34,27 @@ public class LoginTests extends BasicTest {
         Assert.assertEquals(loginPage.getPasswordInputTypeAttribute(), "password",
                 "Password input type should be 'password'");
     }
+    @Test (priority = 4, retryAnalyzer = RetryAnalyzer.class)
+    public void displaysErrorWhenUserDoesNotExist() {
+        String email = "non-existing-user@gmal.com";
+        String password = "password123";
+
+        navPage.clickOnNavLoginLink();
+        navPage.waitForRedirectionToLoginPage();
+
+        loginPage.clearAndTypeEmail(email);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickOnLoginButton();
+
+        messagePopUpPage.waitUntilPopUpMessageIsVisible();
+        Assert.assertEquals(
+                messagePopUpPage.getTextFromPopUpMessage(),
+                "User does not exists",
+                "Pop-up error message text should be 'User does not exists'.");
+
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "login",
+                "Current page should still be Login page.");
+    }
 }

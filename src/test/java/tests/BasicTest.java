@@ -11,6 +11,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import pages.LoginPage;
+import pages.MessagePopUpPage;
 import pages.NavPage;
 
 import java.io.IOException;
@@ -22,6 +23,7 @@ public class BasicTest {
     protected String baseUrl = "https://vue-demo.daniel-avellaneda.com/";
     protected LoginPage loginPage;
     protected NavPage navPage;
+    protected MessagePopUpPage messagePopUpPage;
 
     @BeforeClass
     public void setup() {
@@ -32,6 +34,7 @@ public class BasicTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         loginPage = new LoginPage(driver, wait);
         navPage = new NavPage(driver, wait);
+        messagePopUpPage = new MessagePopUpPage(driver, wait);
     }
     @BeforeMethod
     public void beforeMethod() {
