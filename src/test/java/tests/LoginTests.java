@@ -57,4 +57,27 @@ public class LoginTests extends BasicTest {
                 baseUrl + "login",
                 "Current page should still be Login page.");
     }
+    @Test (priority = 5, retryAnalyzer = RetryAnalyzer.class)
+    public void displaysErrorWhenPasswordIsWrong() {
+        String email = "admin@admin.com";
+        String password = "password123";
+
+        navPage.clickOnNavLoginLink();
+        navPage.waitForRedirectionToLoginPage();
+
+        loginPage.clearAndTypeEmail(email);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickOnLoginButton();
+
+        messagePopUpPage.waitUntilPopUpMessageIsVisible();
+        Assert.assertEquals(
+                messagePopUpPage.getTextFromPopUpMessage(),
+                "Wrong password",
+                "Pop-up error message text should be 'Wrong password'.");
+
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "login",
+                "Current page should still be Login page.");
+    }
 }
