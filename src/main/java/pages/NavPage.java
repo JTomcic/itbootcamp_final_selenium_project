@@ -37,4 +37,9 @@ public class NavPage extends BasicPage {
     public void clickOnNavLoginLink() {
         getNavLoginLink().click();
     }
+    public void waitForRedirectionToLoginPage() {
+        wait
+                .withMessage("After click on Login should be redirected to Login page.")
+                .until(ExpectedConditions.urlToBe("https://vue-demo.daniel-avellaneda.com/login"));
+    }
 }
