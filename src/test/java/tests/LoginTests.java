@@ -98,4 +98,25 @@ public class LoginTests extends BasicTest {
                 baseUrl + "home",
                 "URL should still be 'https://vue-demo.daniel-avellaneda.com/home'.");
     }
+    @Test (priority = 7, retryAnalyzer = RetryAnalyzer.class)
+    public void logout() {
+        String email = "admin@admin.com";
+        String password = "12345";
+
+        navPage.clickOnNavLoginLink();
+        navPage.waitForRedirectionToLoginPage();
+
+        loginPage.clearAndTypeEmail(email);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickOnLoginButton();
+        loginPage.waitForRedirectionToHomePage();
+
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "home",
+                "URL should still be 'https://vue-demo.daniel-avellaneda.com/home'.");
+
+        loginPage.waitForVisibilityOfLogoutButton();
+        loginPage.clickOnLogoutButton();
+    }
 }

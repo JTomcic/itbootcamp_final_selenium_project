@@ -41,4 +41,15 @@ public class LoginPage extends BasicPage{
                 .withMessage("After click on Login URL should be 'https://vue-demo.daniel-avellaneda.com/home'.")
                 .until(ExpectedConditions.urlToBe("https://vue-demo.daniel-avellaneda.com/home"));
     }
+    public WebElement getLogoutButton() {
+        return driver.findElement(By.cssSelector(".btnLogout"));
+    }
+    public void clickOnLogoutButton() {
+        getLogoutButton().click();
+    }
+    public void waitForVisibilityOfLogoutButton() {
+        wait
+                .withMessage("Logout button should be visible.")
+                .until(ExpectedConditions.visibilityOf(getLogoutButton()));
+    }
 }
