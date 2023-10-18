@@ -10,6 +10,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import pages.LoginPage;
+import pages.NavPage;
 
 import java.io.IOException;
 import java.time.Duration;
@@ -17,7 +19,9 @@ import java.time.Duration;
 public class BasicTest {
     protected WebDriver driver;
     protected WebDriverWait wait;
-    protected String baseUrl = "https://vue-demo.daniel-avellaneda.com";
+    protected String baseUrl = "https://vue-demo.daniel-avellaneda.com/";
+    protected LoginPage loginPage;
+    protected NavPage navPage;
 
     @BeforeClass
     public void setup() {
@@ -26,6 +30,8 @@ public class BasicTest {
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        loginPage = new LoginPage(driver, wait);
+        navPage = new NavPage(driver, wait);
     }
     @BeforeMethod
     public void beforeMethod() {

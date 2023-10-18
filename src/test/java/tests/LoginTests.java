@@ -12,4 +12,16 @@ public class LoginTests extends BasicTest {
                 baseUrl,
                 "Should be redirected to 'https://vue-demo.daniel-avellaneda.com/'.");
     }
+    @Test (priority = 2, retryAnalyzer = RetryAnalyzer.class)
+    public void visitsTheLoginPage() {
+        navPage.clickOnLanguageButton();
+        navPage.waitForVisibilityOfLanguageMenu();
+        navPage.clickOnENButton();
+
+        navPage.clickOnNavLoginLink();
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "login",
+                "Should be redirected to Login page.");
+    }
 }
