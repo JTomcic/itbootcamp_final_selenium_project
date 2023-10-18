@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage extends BasicPage{
@@ -34,5 +35,10 @@ public class LoginPage extends BasicPage{
     }
     public void clickOnLoginButton() {
         getLoginButton().click();
+    }
+    public void waitForRedirectionToHomePage() {
+        wait
+                .withMessage("After click on Login URL should be 'https://vue-demo.daniel-avellaneda.com/home'.")
+                .until(ExpectedConditions.urlToBe("https://vue-demo.daniel-avellaneda.com/home"));
     }
 }

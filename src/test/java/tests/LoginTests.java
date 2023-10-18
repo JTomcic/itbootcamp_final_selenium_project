@@ -80,4 +80,22 @@ public class LoginTests extends BasicTest {
                 baseUrl + "login",
                 "Current page should still be Login page.");
     }
+    @Test (priority = 6, retryAnalyzer = RetryAnalyzer.class)
+    public void successfulLogin() {
+        String email = "admin@admin.com";
+        String password = "12345";
+
+        navPage.clickOnNavLoginLink();
+        navPage.waitForRedirectionToLoginPage();
+
+        loginPage.clearAndTypeEmail(email);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickOnLoginButton();
+        loginPage.waitForRedirectionToHomePage();
+
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "home",
+                "URL should still be 'https://vue-demo.daniel-avellaneda.com/home'.");
+    }
 }
