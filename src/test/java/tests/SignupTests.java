@@ -20,5 +20,21 @@ public class SignupTests extends BasicTest{
                 baseUrl + "signup",
                 "Should be redirected to Signup page.");
     }
+    @Test (priority = 3, retryAnalyzer = RetryAnalyzer.class)
+    public void checksInputTypes() {
+        navPage.clickOnSignupLink();
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "signup",
+                "Should be redirected to Signup page.");
 
+        Assert.assertEquals(signupPage.getNameInputTypeAttribute(), "text",
+                "Name input type should be 'text'");
+        Assert.assertEquals(signupPage.getEmailInputTypeAttribute(), "email",
+                "Email input type should be 'email'");
+        Assert.assertEquals(signupPage.getPasswordInputTypeAttribute(), "password",
+                "Password input type should be 'password'");
+        Assert.assertEquals(signupPage.getConfirmPasswordInputTypeAttribute(), "password",
+                "Confirm password input type should be 'password'");
+    }
 }
