@@ -47,4 +47,9 @@ public class NavPage extends BasicPage {
     public void clickOnSignupLink() {
         getSignupLink().click();
     }
+    public void waitForRedirectionToSignupPage() {
+        wait
+                .withMessage("After click on Login should be redirected to Signup page.")
+                .until(ExpectedConditions.urlToBe("https://vue-demo.daniel-avellaneda.com/signup"));
+    }
 }

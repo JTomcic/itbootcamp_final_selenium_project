@@ -42,11 +42,17 @@ public class SignupPage extends BasicPage {
     public WebElement getConfirmPasswordInput() {
         return driver.findElement(By.id("confirmPassword"));
     }
-    public void clearAndTypeConfirmPassword(String email) {
+    public void clearAndTypeConfirmPassword(String confirmPassword) {
         getConfirmPasswordInput().clear();
-        getConfirmPasswordInput().sendKeys(email);
+        getConfirmPasswordInput().sendKeys(confirmPassword);
     }
     public String getConfirmPasswordInputTypeAttribute() {
         return getConfirmPasswordInput().getAttribute("type");
+    }
+    public WebElement getSignUpButton () {
+        return driver.findElement(By.className("v-btn--is-elevated"));
+    }
+    public void clickOnSignUpButton () {
+        getSignUpButton().click();
     }
 }
