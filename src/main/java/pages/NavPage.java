@@ -32,7 +32,6 @@ public class NavPage extends BasicPage {
     }
     public WebElement getNavLoginLink() {
         return driver.findElement(By.xpath("//div[@class = 'v-toolbar__items']/a[3]"));
-//        .flex > button
     }
     public void clickOnNavLoginLink() {
         getNavLoginLink().click();
@@ -41,5 +40,11 @@ public class NavPage extends BasicPage {
         wait
                 .withMessage("After click on Login should be redirected to Login page.")
                 .until(ExpectedConditions.urlToBe("https://vue-demo.daniel-avellaneda.com/login"));
+    }
+    public WebElement getSignupLink() {
+        return driver.findElement(By.xpath("//div[@class = 'v-toolbar__items']/a[4]"));
+    }
+    public void clickOnSignupLink() {
+        getSignupLink().click();
     }
 }

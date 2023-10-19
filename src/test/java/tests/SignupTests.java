@@ -12,4 +12,13 @@ public class SignupTests extends BasicTest{
                 baseUrl,
                 "Should be redirected to 'https://vue-demo.daniel-avellaneda.com/'.");
     }
+    @Test (priority = 2, retryAnalyzer = RetryAnalyzer.class)
+    public void visitsTheSignupPage() {
+        navPage.clickOnSignupLink();
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "signup",
+                "Should be redirected to Signup page.");
+    }
+
 }
