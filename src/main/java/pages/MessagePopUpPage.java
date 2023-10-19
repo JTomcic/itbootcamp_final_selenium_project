@@ -20,8 +20,24 @@ public class MessagePopUpPage extends BasicPage{
                 .withMessage("Pop-up message should be visible.")
                 .until(ExpectedConditions.visibilityOf(getPopUpMessage()));
     }
-
     public String getTextFromPopUpMessage () {
         return getPopUpMessage().getText();
+    }
+    public void waitUntilDialogIsVisible () {
+        wait
+                .withMessage("Dialog should be visible.")
+                .until(ExpectedConditions.visibilityOf(getDialogTitle()));
+    }
+    public WebElement getDialogTitle() {
+        return driver.findElement(By.cssSelector(".dlgVerifyAccount"));
+    }
+    public String getTextFromDialogTitle () {
+        return getDialogTitle().getText();
+    }
+    public WebElement getCloseButton () {
+        return driver.findElement(By.cssSelector(".btnClose"));
+    }
+    public void clickOnCloseButton () {
+        getCloseButton().click();
     }
 }

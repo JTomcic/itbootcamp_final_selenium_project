@@ -67,4 +67,38 @@ public class SignupTests extends BasicTest{
                 baseUrl + "signup",
                 "Current page should still be Signup page.");
     }
+    @Test (priority = 5, retryAnalyzer = RetryAnalyzer.class)
+    public void signup() {
+        String name = "Milica Milicic";
+        String email = "milica.milicic@itbootcamp.rs";
+        String password = "12345";
+        String confirmPassword = "12345";
+
+        navPage.clickOnSignupLink();
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "signup",
+                "Should be redirected to Signup page.");
+
+        signupPage.clearAndTypeName(name);
+        signupPage.clearAndTypeEmail(email);
+        signupPage.clearAndTypePassword(password);
+        signupPage.clearAndTypeConfirmPassword(confirmPassword);
+        signupPage.clickOnSignUpButton();
+        loginPage.waitForRedirectionToHomePage();
+
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "home",
+                "URL should still be 'https://vue-demo.daniel-avellaneda.com/home'.");
+
+        messagePopUpPage.waitUntilDialogIsVisible();
+        Assert.assertEquals(
+                messagePopUpPage.getTextFromDialogTitle(),
+                "IMPORTANT: Verify your account",
+                "Pop-up error message text should be 'IMPORTANT: Verify your account'.");
+
+        messagePopUpPage.clickOnCloseButton();
+        loginPage.clickOnLogoutButton();
+    }
 }
