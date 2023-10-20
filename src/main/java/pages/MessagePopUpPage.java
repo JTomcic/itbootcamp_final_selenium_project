@@ -40,4 +40,16 @@ public class MessagePopUpPage extends BasicPage{
     public void clickOnCloseButton () {
         getCloseButton().click();
     }
+    public WebElement getPopUpMessageForNewItem () {
+        return driver.findElement(By.cssSelector(".success .v-snack__content"));
+    }
+
+    public void waitUntilPopUpMessageForNewItemIsVisible () {
+        wait
+                .withMessage("Pop-up message should be visible.")
+                .until(ExpectedConditions.visibilityOf(getPopUpMessageForNewItem()));
+    }
+    public String getTextFromPopUpMessageForNewItem () {
+        return getPopUpMessageForNewItem().getText();
+    }
 }

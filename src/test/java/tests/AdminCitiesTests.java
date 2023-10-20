@@ -73,4 +73,44 @@ public class AdminCitiesTests extends BasicTest {
         Assert.assertEquals(citiesPage.getCityInputFieldTypeAttribute(), "text",
                 "City input field type should be 'text'");
     }
+    @Test (priority = 4, retryAnalyzer = RetryAnalyzer.class)
+    public void createNewCity() {
+        String adminEmail = "admin@admin.com";
+        String adminPassword = "12345";
+        String city = "Jovana Tomcic's city";
+
+        navPage.clickOnNavLoginLink();
+        navPage.waitForRedirectionToLoginPage();
+
+        loginPage.clearAndTypeEmail(adminEmail);
+        loginPage.clearAndTypePassword(adminPassword);
+        loginPage.clickOnLoginButton();
+        loginPage.waitForRedirectionToHomePage();
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "home",
+                "URL should still be 'https://vue-demo.daniel-avellaneda.com/home'.");
+
+        loginPage.clickOnAdminLink();
+        loginPage.waitForVisibilityOfAdminMenu();
+
+        loginPage.clickOnCitiesButtonFromAdminList();
+        loginPage.waitForRedirectionToAdminCitiesPage();
+
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "admin/cities",
+                "Should be redirected to Admin Cities page.");
+
+        citiesPage.clickOnNewItemButton();
+        citiesPage.waitForVisibilityOfNewItemMenu();
+        Assert.assertEquals(citiesPage.getCityInputFieldTypeAttribute(), "text",
+                "City input field type should be 'text'");
+
+        citiesPage.clearAndTypeCityName(city);
+        citiesPage.clickOnSaveButton();
+        messagePopUpPage.waitUntilPopUpMessageForNewItemIsVisible();
+        Assert.assertTrue(messagePopUpPage.getTextFromPopUpMessageForNewItem().contains("Saved successfully"),
+                "Pop-up message text should be 'Saved successfully'.");
+    }
 }
