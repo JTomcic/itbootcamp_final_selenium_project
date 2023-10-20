@@ -40,4 +40,37 @@ public class AdminCitiesTests extends BasicTest {
                 baseUrl + "admin/cities",
                 "Should be redirected to Admin Cities page.");
     }
+    @Test (priority = 3, retryAnalyzer = RetryAnalyzer.class)
+    public void checksInputTypesForCreateEditNewCity() {
+        String adminEmail = "admin@admin.com";
+        String adminPassword = "12345";
+
+        navPage.clickOnNavLoginLink();
+        navPage.waitForRedirectionToLoginPage();
+
+        loginPage.clearAndTypeEmail(adminEmail);
+        loginPage.clearAndTypePassword(adminPassword);
+        loginPage.clickOnLoginButton();
+        loginPage.waitForRedirectionToHomePage();
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "home",
+                "URL should still be 'https://vue-demo.daniel-avellaneda.com/home'.");
+
+        loginPage.clickOnAdminLink();
+        loginPage.waitForVisibilityOfAdminMenu();
+
+        loginPage.clickOnCitiesButtonFromAdminList();
+        loginPage.waitForRedirectionToAdminCitiesPage();
+
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "admin/cities",
+                "Should be redirected to Admin Cities page.");
+
+        citiesPage.clickOnNewItemButton();
+        citiesPage.waitForVisibilityOfNewItemMenu();
+        Assert.assertEquals(citiesPage.getCityInputFieldTypeAttribute(), "text",
+                "City input field type should be 'text'");
+    }
 }
