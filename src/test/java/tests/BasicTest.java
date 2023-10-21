@@ -45,7 +45,8 @@ public class BasicTest {
     @AfterMethod
     public void afterMethod(ITestResult testResult) throws IOException {
         if (testResult.getStatus() == ITestResult.FAILURE) {
-            Helper.takeAScreenshot(driver, "screenshots/" + testResult.getName() + ".jpg");
+            Helper.takeAScreenshot(driver, "C://Projekti//itbootcamp_final_selenium_project//screenshots//"
+                    + testResult.getName() + ".jpg");
         }
     }
     @AfterClass
