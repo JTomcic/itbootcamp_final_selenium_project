@@ -32,4 +32,13 @@ public class LocaleTests extends BasicTest {
                 "首页",
                 "After click on CN button the header title should be '首页'.");
     }
+    @Test(priority = 4, retryAnalyzer = RetryAnalyzer.class)
+    public void setLocaleToFR() {
+        navPage.clickOnLanguageButton();
+        navPage.waitForVisibilityOfLanguageMenu();
+        navPage.clickOnFRButton();
+        Assert.assertEquals(navPage.getHeaderTitleText(),
+                "Page d'atterrissage",
+                "After click on FR button the header title should be 'Page d'atterrissage.");
+    }
 }
