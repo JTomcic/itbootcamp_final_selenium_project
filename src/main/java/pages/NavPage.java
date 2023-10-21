@@ -36,6 +36,12 @@ public class NavPage extends BasicPage {
     public void clickOnESButton() {
         getESButton().click();
     }
+    public WebElement getCNButton() {
+        return driver.findElement(By.cssSelector(".btnCN"));
+    }
+    public void clickOnCNButton() {
+        getCNButton().click();
+    }
     public String getHeaderTitleText() {
         return driver.findElement(By.tagName("h1")).getText();
     }
