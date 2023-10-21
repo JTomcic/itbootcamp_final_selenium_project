@@ -74,4 +74,11 @@ public class CitiesPage extends BasicPage {
                 .withMessage("After click on Edit button should be visible Edit dialog.")
                 .until(ExpectedConditions.visibilityOf(getEditDialogContent()));
     }
+    public WebElement getCellFromRow(int row, int column) {
+        return driver.findElement(By.cssSelector(".v-data-table__wrapper tbody tr:nth-child" +
+                "(" + row + ") td:nth-child(" + column + ")"));
+    }
+    public String getTextFromCellFromRow(int row, int column) {
+        return getCellFromRow(row, column).getText();
+    }
 }

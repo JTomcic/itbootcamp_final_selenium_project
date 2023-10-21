@@ -117,8 +117,8 @@ public class AdminCitiesTests extends BasicTest {
     public void editCity() {
         String adminEmail = "admin@admin.com";
         String adminPassword = "12345";
-        String oldCityName = "New York";
-        String newCityName = "Belgrade";
+        String oldCityName = "Jovana Tomcic's city";
+        String newCityName = "Jovana Tomcic's city Edited";
 
         navPage.clickOnNavLoginLink();
         navPage.waitForRedirectionToLoginPage();
@@ -152,5 +152,39 @@ public class AdminCitiesTests extends BasicTest {
         messagePopUpPage.waitUntilPopUpMessageForNewItemIsVisible();
         Assert.assertTrue(messagePopUpPage.getTextFromPopUpMessageForNewItem().contains("Saved successfully"),
                 "Pop-up message text should be 'Saved successfully'.");
+    }
+    @Test (priority = 6, retryAnalyzer = RetryAnalyzer.class)
+    public void searchCity() {
+        String adminEmail = "admin@admin.com";
+        String adminPassword = "12345";
+        String cityName = "Jovana Tomcic's city Edited";
+
+        navPage.clickOnNavLoginLink();
+        navPage.waitForRedirectionToLoginPage();
+
+        loginPage.clearAndTypeEmail(adminEmail);
+        loginPage.clearAndTypePassword(adminPassword);
+        loginPage.clickOnLoginButton();
+        loginPage.waitForRedirectionToHomePage();
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "home",
+                "URL should still be 'https://vue-demo.daniel-avellaneda.com/home'.");
+
+        loginPage.clickOnAdminLink();
+        loginPage.waitForVisibilityOfAdminMenu();
+
+        loginPage.clickOnCitiesButtonFromAdminList();
+        loginPage.waitForRedirectionToAdminCitiesPage();
+
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "admin/cities",
+                "Should be redirected to Admin Cities page.");
+
+        citiesPage.clearAndTypeOldCityName(cityName);
+        citiesPage.waitForNumberRowsInTable(1);
+        Assert.assertEquals(citiesPage.getTextFromCellFromRow(1,2), cityName,
+                "City name in first row should be" + cityName);
     }
 }
