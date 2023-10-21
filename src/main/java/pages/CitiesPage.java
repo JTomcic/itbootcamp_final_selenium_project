@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -40,5 +41,37 @@ public class CitiesPage extends BasicPage {
     }
     public void clickOnSaveButton() {
         getSaveButton().click();
+    }
+    public WebElement getSearchInput() {
+        return driver.findElement(By.id("search"));
+    }
+    public String getSearcInputFieldTypeAttribute() {
+        return getSearchInput().getAttribute("type");
+    }
+    public void clearAndTypeOldCityName(String oldCityName) {
+        getSearchInput().clear();
+        getSearchInput().sendKeys(oldCityName);
+    }
+    public void clearAndTypeNewCityName(String newCityName) {
+        getNameInput().sendKeys(Keys.chord(Keys.CONTROL, "a"), newCityName);
+    }
+    public void waitForNumberRowsInTable(int rowsNumber) {
+        wait
+                .withMessage("Number rows in table should be 1.")
+                .until(ExpectedConditions.numberOfElementsToBe(By.id("search"), rowsNumber));
+    }
+    public WebElement getEditButton() {
+        return driver.findElement(By.id("edit"));
+    }
+    public void clickOnEditButton() {
+        getEditButton().click();
+    }
+    public WebElement getEditDialogContent() {
+        return driver.findElement(By.cssSelector(".dlgNewEditItem"));
+    }
+    public void waitForVisibilityOfEditDialog() {
+        wait
+                .withMessage("After click on Edit button should be visible Edit dialog.")
+                .until(ExpectedConditions.visibilityOf(getEditDialogContent()));
     }
 }

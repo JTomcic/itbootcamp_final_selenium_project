@@ -113,4 +113,44 @@ public class AdminCitiesTests extends BasicTest {
         Assert.assertTrue(messagePopUpPage.getTextFromPopUpMessageForNewItem().contains("Saved successfully"),
                 "Pop-up message text should be 'Saved successfully'.");
     }
+    @Test (priority = 5, retryAnalyzer = RetryAnalyzer.class)
+    public void editCity() {
+        String adminEmail = "admin@admin.com";
+        String adminPassword = "12345";
+        String oldCityName = "New York";
+        String newCityName = "Belgrade";
+
+        navPage.clickOnNavLoginLink();
+        navPage.waitForRedirectionToLoginPage();
+
+        loginPage.clearAndTypeEmail(adminEmail);
+        loginPage.clearAndTypePassword(adminPassword);
+        loginPage.clickOnLoginButton();
+        loginPage.waitForRedirectionToHomePage();
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "home",
+                "URL should still be 'https://vue-demo.daniel-avellaneda.com/home'.");
+
+        loginPage.clickOnAdminLink();
+        loginPage.waitForVisibilityOfAdminMenu();
+
+        loginPage.clickOnCitiesButtonFromAdminList();
+        loginPage.waitForRedirectionToAdminCitiesPage();
+
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                baseUrl + "admin/cities",
+                "Should be redirected to Admin Cities page.");
+
+        citiesPage.clearAndTypeOldCityName(oldCityName);
+        citiesPage.waitForNumberRowsInTable(1);
+        citiesPage.clickOnEditButton();
+        citiesPage.waitForVisibilityOfEditDialog();
+        citiesPage.clearAndTypeNewCityName(newCityName);
+        citiesPage.clickOnSaveButton();
+        messagePopUpPage.waitUntilPopUpMessageForNewItemIsVisible();
+        Assert.assertTrue(messagePopUpPage.getTextFromPopUpMessageForNewItem().contains("Saved successfully"),
+                "Pop-up message text should be 'Saved successfully'.");
+    }
 }
