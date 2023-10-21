@@ -30,6 +30,16 @@ public class NavPage extends BasicPage {
     public void clickOnENButton() {
         getENButton().click();
     }
+    public WebElement getESButton() {
+        return driver.findElement(By.cssSelector(".btnES"));
+    }
+    public void clickOnESButton() {
+        getESButton().click();
+    }
+    public String getHeaderTitleText() {
+        return driver.findElement(By.tagName("h1")).getText();
+    }
+
     public WebElement getNavLoginLink() {
         return driver.findElement(By.xpath("//div[@class = 'v-toolbar__items']/a[3]"));
     }
