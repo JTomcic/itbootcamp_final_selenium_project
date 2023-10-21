@@ -14,4 +14,13 @@ public class LocaleTests extends BasicTest {
                 "Página de aterrizaje",
                 "After click on ES button the header title should be 'Página de aterrizaje'.");
     }
+    @Test(priority = 2, retryAnalyzer = RetryAnalyzer.class)
+    public void setLocaleToEN() {
+        navPage.clickOnLanguageButton();
+        navPage.waitForVisibilityOfLanguageMenu();
+        navPage.clickOnENButton();
+        Assert.assertEquals(navPage.getHeaderTitleText(),
+                "Landing",
+                "After click on EN button the header title should be 'Landing'.");
+    }
 }
